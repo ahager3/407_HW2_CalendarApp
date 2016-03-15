@@ -1,24 +1,38 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#caecfa"
+    android:background="#797373"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/FrameLayout">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="What date would you like to view?"
+        android:id="@+id/header"
+        android:layout_gravity="center" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="ex. Jan 17"
         android:id="@+id/buttonOne"
         android:layout_gravity="center_vertical|center_horizontal"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        android:id="@+id/answerTwo"
+        android:layout_gravity="right|bottom"/>
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="What date would you like to view?\n                          ex. Jan 17"
+        android:text="Large Text"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal|top" />
 

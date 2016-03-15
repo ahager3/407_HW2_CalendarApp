@@ -20,17 +20,17 @@ import java.util.Scanner;
 /**
  * Created by aaron on 3/12/16.
  */
-public class DateFragment extends Fragment{
+public class EditFragment extends Fragment{
 
     public EditText buttonOne;
 
-    public static DateFragment newInstance(String date){
-        DateFragment fragment = new DateFragment();
+    public static EditFragment newInstance(String date){
+        EditFragment fragment = new EditFragment();
 
         return fragment;
     }
 
-    public DateFragment(){}
+    public EditFragment(){}
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -44,7 +44,8 @@ public class DateFragment extends Fragment{
         View view = null;
         view = inflater.inflate(R.layout.fragment_date, container, false);
 
-          buttonOne = (EditText) view.findViewById(R.id.buttonOne);
+        // instantiate widgets here
+//        buttonOne = (EditText) view.findViewById(R.id.answerOne);
 //        answerTwo = (Button) view.findViewById(R.id.answerTwo);
 //        question = (TextView) view.findViewById(R.id.textView);
 //        question.setText("Question " + total_questions);
@@ -55,27 +56,6 @@ public class DateFragment extends Fragment{
 
         return view;
     }
-
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        buttonOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // Go to a QuizFragment
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.main_fragment_container, EditFragment.newInstance(buttonOne.getText().toString()))
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-
-
-
-    }
-
 
     public String getDate(String date){
         // File file = new File("events.txt");

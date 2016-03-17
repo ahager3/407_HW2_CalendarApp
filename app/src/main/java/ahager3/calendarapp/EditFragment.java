@@ -174,8 +174,11 @@ public class EditFragment extends Fragment{
     public void writeData(String data){
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         String contents = sharedPref.getString(day, "");
+        if(!contents.equals("")){
+            contents += "\n";
+        }
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(day, contents + "\n" + data.substring(0, data.length() - 13));
+        editor.putString(day, contents + data.substring(0, data.length() - 13));
         editor.commit();
 
 //        File file = new File("events.txt");

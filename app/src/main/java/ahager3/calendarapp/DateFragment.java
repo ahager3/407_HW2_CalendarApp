@@ -63,7 +63,7 @@ public class DateFragment extends Fragment{
 
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("Jan 12", "Eat a human being");
+        editor.putString("Jan 12", "Seeded Event Value");
         editor.commit();
 
         buttonOne.setOnClickListener(new View.OnClickListener() {

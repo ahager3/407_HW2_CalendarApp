@@ -40,8 +40,6 @@
         android:layout_height="wrap_content"
         android:text="New date"
         android:id="@+id/button"
-        android:layout_gravity="top|right"
-        />
-
+        android:layout_gravity="top|right"/>
 
 </FrameLayout>

@@ -133,12 +133,17 @@ public class EditFragment extends Fragment{
             i++;
             System.out.println(lineNum + "|");
             if (i != Integer.parseInt(lineNum.substring(0, lineNum.length() - 22))){
+                String str = "";
                 try {
-                    data += scnr.nextLine() + "\n";
+                    str += scnr.nextLine();
                 } catch(Exception e){break;}
+                if(i > 1 && Integer.parseInt(lineNum.substring(0, lineNum.length() - 22)) != 1){
+                    data += "\n";
+                }
+                data += str;
             }
             else {
-                try{scnr.nextLine();}catch(Exception e){break;}
+                try{scnr.nextLine();}catch (Exception e){break;}
             }
             System.out.println(data);
         }

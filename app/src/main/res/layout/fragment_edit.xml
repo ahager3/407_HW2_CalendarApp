@@ -35,5 +35,13 @@
         android:id="@+id/delete"
         android:layout_gravity="left|bottom"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New date"
+        android:id="@+id/button"
+        android:layout_gravity="top|right"
+        />
+
 
 </FrameLayout>

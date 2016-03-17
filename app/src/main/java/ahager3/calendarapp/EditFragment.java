@@ -29,6 +29,7 @@ import java.util.Scanner;
  */
 public class EditFragment extends Fragment{
 
+    public Button button;
     public EditText add;
     public EditText delete;
     public TextView header;
@@ -66,6 +67,8 @@ public class EditFragment extends Fragment{
         list.setText(str);
         add = (EditText) view.findViewById(R.id.add);
         delete = (EditText) view.findViewById(R.id.delete);
+        button = (Button) view.findViewById(R.id.button);
+
 //        buttonOne = (EditText) view.findViewById(R.id.answerOne);
 //        answerTwo = (Button) view.findViewById(R.id.answerTwo);
 //        question = (TextView) view.findViewById(R.id.textView);
@@ -106,6 +109,17 @@ public class EditFragment extends Fragment{
                         .commit();
             }
         });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Go to a QuizFragment
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_fragment_container, DateFragment.newInstance(day))
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
 
     public void deleteLineNumber(String lineNum){
@@ -120,9 +134,13 @@ public class EditFragment extends Fragment{
             System.out.println(lineNum + "|");
             if (i != Integer.parseInt(lineNum.substring(0, lineNum.length() - 22))){
                 try {
-                    data += scnr.nextLine();
+                    data += scnr.nextLine() + "\n";
                 } catch(Exception e){break;}
             }
+            else {
+                try{scnr.nextLine();}catch(Exception e){break;}
+            }
+            System.out.println(data);
         }
         editor.putString(day, data);
         editor.commit();

@@ -97,7 +97,7 @@ public class EditFragment extends Fragment{
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteLineNumber(add.getText().toString());
+                deleteLineNumber(delete.getText().toString());
                 // Go to a QuizFragment
                 getFragmentManager()
                         .beginTransaction()
@@ -117,13 +117,14 @@ public class EditFragment extends Fragment{
         int i = 0;
         while(true){
             i++;
-            if (i != Integer.parseInt(lineNum)){
+            System.out.println(lineNum + "|");
+            if (i != Integer.parseInt(lineNum.substring(0, lineNum.length() - 22))){
                 try {
                     data += scnr.nextLine();
                 } catch(Exception e){break;}
             }
         }
-        editor.putString(day, contents + "\n" + data.substring(0, data.length() - 22));
+        editor.putString(day, data);
         editor.commit();
     }
 
@@ -154,7 +155,7 @@ public class EditFragment extends Fragment{
 
     public void writeData(String data){
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        String contents = sharedPref.getString(day, "No events");
+        String contents = sharedPref.getString(day, "");
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(day, contents + "\n" + data.substring(0, data.length() - 13));
         editor.commit();

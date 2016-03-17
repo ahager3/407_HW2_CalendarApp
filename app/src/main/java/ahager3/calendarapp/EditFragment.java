@@ -2,7 +2,9 @@ package ahager3.calendarapp;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +14,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -22,11 +29,17 @@ import java.util.Scanner;
  */
 public class EditFragment extends Fragment{
 
-    public EditText buttonOne;
+    public EditText add;
+    public TextView header;
+    public TextView list;
+    public static String ARG = "arg";
+    public String day;
 
     public static EditFragment newInstance(String date){
         EditFragment fragment = new EditFragment();
-
+        Bundle args = new Bundle();
+        args.putString(ARG, date);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -35,16 +48,22 @@ public class EditFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         if (getArguments() != null){
-//            correct_responses = getArguments().getInt(ARG_1);
+            day = getArguments().getString(ARG);
 //            total_questions = getArguments().getInt(ARG_2);
         }
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = null;
-        view = inflater.inflate(R.layout.fragment_date, container, false);
+        view = inflater.inflate(R.layout.fragment_edit, container, false);
 
         // instantiate widgets here
+        header = (TextView) view.findViewById(R.id.date);
+        header.setText(day + "\nEvents");
+        list = (TextView) view.findViewById(R.id.list);
+        String str = getEvents(day);
+        list.setText(str);
+        add = (EditText) view.findViewById(R.id.add);
 //        buttonOne = (EditText) view.findViewById(R.id.answerOne);
 //        answerTwo = (Button) view.findViewById(R.id.answerTwo);
 //        question = (TextView) view.findViewById(R.id.textView);
@@ -57,27 +76,66 @@ public class EditFragment extends Fragment{
         return view;
     }
 
-    public String getDate(String date){
-        // File file = new File("events.txt");
-        String data = "";
-        Scanner scanner = new Scanner("events.txt");
-        String line = scanner.nextLine();
-        if(line.substring(0, date.length()).equals(date)){
-            // add line to date
-            data += line + "\n";
-        }
-        return data;
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                writeData(add.getText().toString());
+                // Go to a QuizFragment
+                getFragmentManager()
+                        .beginTransaction()
+                           .replace(R.id.main_fragment_container, EditFragment.newInstance(day))
+                           .addToBackStack(null)
+                           .commit();
+            }
+        });
     }
-    private String date;
+
+    public String getEvents(String date){
+
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        String contents = sharedPref.getString(date, "No events");
+        String data = "";
+        String line = "";
+
+        Scanner scanner = new Scanner(contents);
+        while(true) {
+            try {
+                line = scanner.nextLine();
+                System.out.println("Line read");
+            }
+            catch(Exception e){
+                System.out.println(e);
+                break;
+            }
+            if (line.length() > date.length() && line.substring(0, date.length() - 1).equals(date)) {
+                // add line to date
+                data += "*" + line.substring(date.length(), line.length() - 1) + "\n";
+            }
+        }
+        return contents;
+    }
+
     public void writeData(String data){
-        File file = new File("events.txt");
-        try {
-            PrintWriter pw = new PrintWriter(file);
-            pw.println(date + data);
-        }
-        catch(FileNotFoundException e){
-            System.out.println("FileNotFoundException");
-        }
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        String contents = sharedPref.getString(day, "No events");
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(day, contents + "\n" + data);
+        editor.commit();
+
+//        File file = new File("events.txt");
+//        try {
+//            FileOutputStream stream = new FileOutputStream(file);
+//            System.out.println("Failed creating FileOutputStream");
+//            stream.write("text-to-write".getBytes());
+//            stream.close();
+//            System.out.println("Success!!!!!!!!!!!!!!!!!!!!!!!!!");
+//        }
+//        catch(Exception e){
+//            System.out.println(e);
+//        }
     }
 
 }

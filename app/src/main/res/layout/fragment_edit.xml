@@ -1,6 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#797373"
+    android:background="#f7c8ec"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/FrameLayout">
@@ -10,30 +10,30 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="What date would you like to view?"
-        android:id="@+id/header"
-        android:layout_gravity="center" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ex. Jan 17"
-        android:id="@+id/buttonOne"
-        android:layout_gravity="center_vertical|center_horizontal"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        android:id="@+id/answerTwo"
-        android:layout_gravity="right|bottom"/>
-
+        android:id="@+id/date"
+        android:layout_gravity="top|center" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal|top" />
+        android:text="Muahaha"
+        android:id="@+id/list"
+        android:layout_gravity="center_vertical|center_horizontal" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create"
+        android:id="@+id/add"
+        android:layout_gravity="right|bottom"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        android:id="@+id/answerTwo"
+        android:layout_gravity="left|bottom"/>
+
 
 </FrameLayout>

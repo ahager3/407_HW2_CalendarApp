@@ -2,7 +2,9 @@ package ahager3.calendarapp;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +46,7 @@ public class DateFragment extends Fragment{
         View view = null;
         view = inflater.inflate(R.layout.fragment_date, container, false);
 
-          buttonOne = (EditText) view.findViewById(R.id.buttonOne);
+        buttonOne = (EditText) view.findViewById(R.id.buttonOne);
 //        answerTwo = (Button) view.findViewById(R.id.answerTwo);
 //        question = (TextView) view.findViewById(R.id.textView);
 //        question.setText("Question " + total_questions);
@@ -58,6 +60,11 @@ public class DateFragment extends Fragment{
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("Jan 12", "Eat a human being");
+        editor.commit();
 
         buttonOne.setOnClickListener(new View.OnClickListener() {
             @Override

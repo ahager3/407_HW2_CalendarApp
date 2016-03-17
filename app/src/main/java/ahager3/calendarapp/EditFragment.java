@@ -94,7 +94,7 @@ public class EditFragment extends Fragment{
             }
         });
 
-        add.setOnClickListener(new View.OnClickListener() {
+        delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 deleteLineNumber(add.getText().toString());
@@ -123,7 +123,7 @@ public class EditFragment extends Fragment{
                 } catch(Exception e){break;}
             }
         }
-        editor.putString(day, contents + "\n" + data.substring(0, data.length() - 14));
+        editor.putString(day, contents + "\n" + data.substring(0, data.length() - 22));
         editor.commit();
     }
 
@@ -156,7 +156,7 @@ public class EditFragment extends Fragment{
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         String contents = sharedPref.getString(day, "No events");
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(day, contents + "\n" + data.substring(0, data.length() - 14));
+        editor.putString(day, contents + "\n" + data.substring(0, data.length() - 13));
         editor.commit();
 
 //        File file = new File("events.txt");

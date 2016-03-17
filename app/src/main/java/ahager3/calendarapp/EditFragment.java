@@ -30,6 +30,7 @@ import java.util.Scanner;
 public class EditFragment extends Fragment{
 
     public EditText add;
+    public EditText delete;
     public TextView header;
     public TextView list;
     public static String ARG = "arg";
@@ -64,6 +65,7 @@ public class EditFragment extends Fragment{
         String str = getEvents(day);
         list.setText(str);
         add = (EditText) view.findViewById(R.id.add);
+        delete = (EditText) view.findViewById(R.id.delete);
 //        buttonOne = (EditText) view.findViewById(R.id.answerOne);
 //        answerTwo = (Button) view.findViewById(R.id.answerTwo);
 //        question = (TextView) view.findViewById(R.id.textView);
@@ -86,11 +88,43 @@ public class EditFragment extends Fragment{
                 // Go to a QuizFragment
                 getFragmentManager()
                         .beginTransaction()
-                           .replace(R.id.main_fragment_container, EditFragment.newInstance(day))
-                           .addToBackStack(null)
-                           .commit();
+                        .replace(R.id.main_fragment_container, EditFragment.newInstance(day))
+                        .addToBackStack(null)
+                        .commit();
             }
         });
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteLineNumber(add.getText().toString());
+                // Go to a QuizFragment
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_fragment_container, EditFragment.newInstance(day))
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+    }
+
+    public void deleteLineNumber(String lineNum){
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        String contents = sharedPref.getString(day, "No events");
+        SharedPreferences.Editor editor = sharedPref.edit();
+        Scanner scnr = new Scanner(contents);
+        String data = "";
+        int i = 0;
+        while(true){
+            i++;
+            if (i != Integer.parseInt(lineNum)){
+                try {
+                    data += scnr.nextLine();
+                } catch(Exception e){break;}
+            }
+        }
+        editor.putString(day, contents + "\n" + data.substring(0, data.length() - 14));
+        editor.commit();
     }
 
     public String getEvents(String date){
@@ -122,7 +156,7 @@ public class EditFragment extends Fragment{
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         String contents = sharedPref.getString(day, "No events");
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(day, contents + "\n" + data);
+        editor.putString(day, contents + "\n" + data.substring(0, data.length() - 14));
         editor.commit();
 
 //        File file = new File("events.txt");

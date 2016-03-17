@@ -24,15 +24,15 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create"
+        android:text="Add an event"
         android:id="@+id/add"
         android:layout_gravity="right|bottom"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        android:id="@+id/answerTwo"
+        android:text="Line number to delete"
+        android:id="@+id/delete"
         android:layout_gravity="left|bottom"/>
 
 

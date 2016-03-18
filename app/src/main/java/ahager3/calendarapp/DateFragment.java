@@ -47,13 +47,6 @@ public class DateFragment extends Fragment{
         view = inflater.inflate(R.layout.fragment_date, container, false);
 
         buttonOne = (EditText) view.findViewById(R.id.buttonOne);
-//        answerTwo = (Button) view.findViewById(R.id.answerTwo);
-//        question = (TextView) view.findViewById(R.id.textView);
-//        question.setText("Question " + total_questions);
-//        headerTextView = (TextView) view.findViewById(R.id.header);
-//        headerTextView.setText("What is the square root of 100?");
-//        answerOne.setText("10");
-//        answerTwo.setText("100");
 
         return view;
     }
@@ -80,31 +73,7 @@ public class DateFragment extends Fragment{
         });
 
 
-
     }
 
-
-    public String getDate(String date){
-        // File file = new File("events.txt");
-        String data = "";
-        Scanner scanner = new Scanner("events.txt");
-        String line = scanner.nextLine();
-        if(line.substring(0, date.length()).equals(date)){
-            // add line to date
-            data += line + "\n";
-        }
-        return data;
-    }
-    private String date;
-    public void writeData(String data){
-        File file = new File("events.txt");
-        try {
-            PrintWriter pw = new PrintWriter(file);
-            pw.println(date + data);
-        }
-        catch(FileNotFoundException e){
-            System.out.println("FileNotFoundException");
-        }
-    }
 
 }

@@ -186,17 +186,6 @@ public class EditFragment extends Fragment{
         editor.putString(day, contents + data.substring(0, data.length() - 13));
         editor.commit();
 
-//        File file = new File("events.txt");
-//        try {
-//            FileOutputStream stream = new FileOutputStream(file);
-//            System.out.println("Failed creating FileOutputStream");
-//            stream.write("text-to-write".getBytes());
-//            stream.close();
-//            System.out.println("Success!!!!!!!!!!!!!!!!!!!!!!!!!");
-//        }
-//        catch(Exception e){
-//            System.out.println(e);
-//        }
     }
 
 }
